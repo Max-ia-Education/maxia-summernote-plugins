@@ -35,9 +35,9 @@
             var lang = options.langInfo
 
             self.events = {
-                // "summernote.keyup summernote.mouseup summernote.change summernote.scroll": () => {
-                //     self.update()
-                // },
+                "summernote.keyup summernote.mouseup summernote.change summernote.scroll": () => {
+                    self.update()
+                },
                 "summernote.disable summernote.dialog.shown": () => {
                     self.hide()
                 },
@@ -131,34 +131,34 @@
                 return !!ancestor && ancestor === $.summernote.dom.ancestor(range.ec, self.hasMath)
             }
 
-            // self.update = function () {
-            //     console.log('update')
-            //     // Prevent focusing on editable when invoke('code') is executed
-            //     if (!context.invoke("editor.hasFocus")) {
-            //         self.hide()
-            //         return
-            //     }
+            self.update = function () {
+                console.log('update')
+                // Prevent focusing on editable when invoke('code') is executed
+                if (!context.invoke("editor.hasFocus")) {
+                    self.hide()
+                    return
+                }
 
-            //     const rng = context.invoke("editor.getLastRange")
-            //     if (rng.isCollapsed() && self.isOnMath(rng)) {
-            //         const node = $.summernote.dom.ancestor(rng.sc, self.hasMath)
-            //         const latex = $(node).find(".note-latex")
+                const rng = context.invoke("editor.getLastRange")
+                if (rng.isCollapsed() && self.isOnMath(rng)) {
+                    const node = $.summernote.dom.ancestor(rng.sc, self.hasMath)
+                    const latex = $(node).find(".note-latex")
 
-            //         if (latex.text().length !== 0) {
-            //             self.$popover.find("button").html(latex.text())
-            //             const pos = $.summernote.dom.posFromPlaceholder(node)
-            //             self.$popover.css({
-            //                 display: "block",
-            //                 left: pos.left,
-            //                 top: pos.top,
-            //             })
-            //         } else {
-            //             self.hide()
-            //         }
-            //     } else {
-            //         self.hide()
-            //     }
-            // }
+                    if (latex.text().length !== 0) {
+                        self.$popover.find("button").html(latex.text())
+                        const pos = $.summernote.dom.posFromPlaceholder(node)
+                        self.$popover.css({
+                            display: "block",
+                            left: pos.left,
+                            top: pos.top,
+                        })
+                    } else {
+                        self.hide()
+                    }
+                } else {
+                    self.hide()
+                }
+            }
 
             self.hide = function () {
                 console.log("hide")
@@ -195,7 +195,7 @@
                 let $selectedMathNode = self.getSelectedMath()
                 console.log("🚀 ~ file: summernote-math.js:200 ~ $selectedMathNode:", $selectedMathNode)
 
-                if ($selectedMathNode === null) {
+                if (!$selectedMathNode) {
                     // reset the dialog input and math
                     //$mathSpan.empty();
                     $latexSpan.val("")
@@ -204,7 +204,7 @@
                     // get the hidden LaTeX markup from the selected math node
                     let hiddenLatex = $selectedMathNode.find(".note-latex").text()
                     $latexSpan.val(hiddenLatex)
-                    katex.render(hiddenLatex, $mathSpan[0])
+                    // katex.render(hiddenLatex, $mathSpan[0])
                 }
 
                 let mathInfo = {} // not used
