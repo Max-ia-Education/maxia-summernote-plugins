@@ -46,7 +46,7 @@
             context.memo("button.math", function () {
                 let button = ui.button({
                     contents: options.math.icon,
-                    container: false,
+                    // container: false,
                     tooltip: lang.math.tooltip,
                     click: function (e) {
                         // Cursor position must be saved because is lost when popup is opened.
@@ -59,13 +59,13 @@
 
             self.initialize = function () {
                 let $container = options.dialogsInBody ? $(document.body) : $editor
-                console.log("🚀 ~ file: summernote-math.js:62 ~ $container:", $container)
+
                 let body = `<div class="form-group">
 
                     <p>Type <a href="https://khan.github.io/KaTeX/function-support.html" target=_blank">LaTeX markup</a> here:
                     
-                    <p>
-                        <math-field class="note-latex form-control" style="height: 40px">f(x) = \\sin(x+\\pi)</math-field>
+                    <p style="width:100%">
+                        <math-field class="note-latex form-control" style="height: 40px;width:100%">f(x) = \\sin(x+\\pi)</math-field>
                     </p>
                     <p>Preview: </p>
                     <div style="min-height:20px;"><div class="note-math-dialog"></div>
@@ -73,28 +73,13 @@
                     <script>
                     var $mathElement = $('.note-math-dialog'); //responsavel pela div preview
                     var mathSpan = $mathElement;
-                    var latexSpan = document.getElementsByClassName('note-latex');
-                    
-
-                    if (latexSpan[0]) {
-                        let keyBoardToggle = latexSpan[0].shadowRoot.querySelector(".ML__virtual-keyboard-toggle")
-                        keyBoardToggle.onclick = function () {
-                            let keyBoard = document.querySelector(".ML__keyboard")
-                            keyBoard.addEventListener('click', renderMath)
-                            keyBoard.style["z-index"] = 1051
-                        }
-                        
-                    } 
-
-
-                    for(let i=0;i<latexSpan.length;i++){
-                        latexSpan[i].addEventListener('keyup', renderMath);
-                    }
+                    var latexSpan = document.getElementsByClassName('note-latex')[0];
+                    latexSpan.addEventListener('keyup', renderMath);
 
                     function renderMath(){
                         let oldMath = latexSpan;
-                        console.log("🚀 ~ file: summernote-math.js:96 ~ renderMath ~ latexSpan:", latexSpan)
-                        mathSpan[0].innerHTML = \`<math-field read-only>\${latexSpan[0].value}</math-field>\`
+                        let latexString = katex.renderToString(latexSpan.value)
+                        mathSpan[0].innerHTML = latexString
                     }
 
                     </script>
@@ -118,6 +103,13 @@
                     .appendTo(options.container)
                 const $content = self.$popover.find(".popover-content,.note-popover-content")
                 context.invoke("buttons.build", $content, ["math"])
+
+                                
+                // Math virtual keyboard personalization
+                document.body.style.setProperty("--keyboard-zindex", "1051");
+                document.querySelector('math-field').addEventListener('focus', () => {
+                    mathVirtualKeyboard.visible = true;
+                });
             }
 
             self.hasMath = function (node) {

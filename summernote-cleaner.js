@@ -253,37 +253,37 @@ const swapElements = (body, old_tag, new_tag) => {
                             // $editor.find('.note-status-output').html('<small class="note-pull-right ' + lengthStatus + '&nbsp;</small>');
                         }
                     },
-                    'summernote.keydown': function (we, event) {
-                        if (options.cleaner.limitChars != 0 || options.cleaner.limitDisplay != 'none') {
-                            var textLength = $editor.find(".note-editable").text().replace(/(<([^>]+)>)/ig, "").replace(/( )/, " ");
-                            var codeLength = $editor.find('.note-editable').html();
-                            var lengthStatus = '';
-                            if (options.cleaner.limitStop == true && textLength.length >= options.cleaner.limitChars) {
-                                var key = event.keyCode;
-                                allowed_keys = [8, 37, 38, 39, 40, 46];
-                                if ($.inArray(key, allowed_keys) != -1) {
-                                    $editor.find('.cleanerLimit').removeClass('note-text-danger');
-                                    return true;
-                                } else {
-                                    $editor.find('.cleanerLimit').addClass('note-text-danger');
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                            } else {
-                                if (textLength.length > options.cleaner.limitChars && options.cleaner.limitChars > 0)
-                                    lengthStatus += 'note-text-danger">';
-                                else
-                                    lengthStatus += '">';
-                                if (options.cleaner.limitDisplay == 'text' || options.cleaner.limitDisplay == 'both')
-                                    lengthStatus += lang.cleaner.limitText + ': ' + textLength.length;
-                                if (options.cleaner.limitDisplay == 'both')
-                                    lengthStatus += ' / ';
-                                if (options.cleaner.limitDisplay == 'html' || options.cleaner.limitDisplay == 'both')
-                                    lengthStatus += lang.cleaner.limitHTML + ': ' + codeLength.length;
-                                $editor.find('.note-status-output').html('<small class="cleanerLimit note-pull-right ' + lengthStatus + '&nbsp;</small>');
-                            }
-                        }
-                    },
+                    // 'summernote.keydown': function (we, event) {
+                    //     if (options.cleaner.limitChars != 0 || options.cleaner.limitDisplay != 'none') {
+                    //         var textLength = $editor.find(".note-editable").text().replace(/(<([^>]+)>)/ig, "").replace(/( )/, " ");
+                    //         var codeLength = $editor.find('.note-editable').html();
+                    //         var lengthStatus = '';
+                    //         if (options.cleaner.limitStop == true && textLength.length >= options.cleaner.limitChars) {
+                    //             var key = event.keyCode;
+                    //             allowed_keys = [8, 37, 38, 39, 40, 46];
+                    //             if ($.inArray(key, allowed_keys) != -1) {
+                    //                 $editor.find('.cleanerLimit').removeClass('note-text-danger');
+                    //                 return true;
+                    //             } else {
+                    //                 $editor.find('.cleanerLimit').addClass('note-text-danger');
+                    //                 event.preventDefault();
+                    //                 event.stopPropagation();
+                    //             }
+                    //         } else {
+                    //             if (textLength.length > options.cleaner.limitChars && options.cleaner.limitChars > 0)
+                    //                 lengthStatus += 'note-text-danger">';
+                    //             else
+                    //                 lengthStatus += '">';
+                    //             if (options.cleaner.limitDisplay == 'text' || options.cleaner.limitDisplay == 'both')
+                    //                 lengthStatus += lang.cleaner.limitText + ': ' + textLength.length;
+                    //             if (options.cleaner.limitDisplay == 'both')
+                    //                 lengthStatus += ' / ';
+                    //             if (options.cleaner.limitDisplay == 'html' || options.cleaner.limitDisplay == 'both')
+                    //                 lengthStatus += lang.cleaner.limitHTML + ': ' + codeLength.length;
+                    //             $editor.find('.note-status-output').html('<small class="cleanerLimit note-pull-right ' + lengthStatus + '&nbsp;</small>');
+                    //         }
+                    //     }
+                    // },
                     'summernote.paste': function (we, event) {
                         if (options.cleaner.action == 'both' || options.cleaner.action == 'paste') {
                             event.preventDefault();
