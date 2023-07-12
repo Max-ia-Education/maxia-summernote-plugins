@@ -65,9 +65,9 @@ $(document).ready(function () {
       ["misc", ["codeview"]]
     ],
     styleTags: [
-      { title: 'Título', tag: 'h2' },
-      { title: 'Texto', tag: 'p' },
-      { title: 'Legenda', tag: 'h6' }
+      { title: 'Título', tag: 'h2', value: 'h2' },
+      { title: 'Texto', tag: 'p', value: 'p' },
+      { title: 'Legenda', tag: 'h6', value: 'h6' }
     ],
 
     buttons: {
