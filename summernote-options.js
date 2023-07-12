@@ -1,4 +1,4 @@
-$(document).ready(function () {
+window.initializeSummernote = function () {
   var FontStyleButton = function (context) {
     var ui = $.summernote.ui;
     var options = $.summernote.options;
@@ -54,7 +54,7 @@ $(document).ready(function () {
     return button.render();   // return button as jquery object
   }
 
-  $("#summernote").summernote({
+  $(".summernote").summernote({
     //essa parte é a api que renderiza a barra do summernote
     toolbar: [
       ['style', ['style']],
@@ -77,4 +77,4 @@ $(document).ready(function () {
       magic: 'note-icon-pencil'
     }
   })
-})
+}

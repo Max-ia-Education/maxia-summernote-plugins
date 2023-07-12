@@ -31,7 +31,14 @@
 </head>
 
 <body>
-  <div id="summernote"></div>
+  <div class="summernote"></div>
+
+  <script>
+    $('document').ready(() => {
+      // Function defined in summernote-options.js that should be called once the node is ready
+      window.initializeSummernote();
+    })
+  </script>
 </body>
 
 </html>
