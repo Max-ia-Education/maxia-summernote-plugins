@@ -5,9 +5,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "sass": "node-sass summernote.scss summernote.css"
- },
+    "sass": "sass -w summernote.scss summernote.css"
+  },
   "devDependencies": {
-    "node-sass": "^9.0.0"
+    "sass": "^1.63.6"
   }
 }

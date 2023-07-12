@@ -1,5 +1,7 @@
 // Toolbar styling
 .note-editor {
+  container-type: inline-size;
+
   .note-icon-caret {
     margin-right: -7px;
   }
@@ -25,13 +27,13 @@
   }
 
   // Responsiveness
-  @media (max-width: 630px) {
+  @container (max-width: 445px) {
     .note-misc {
       display: none;
     }
   }
 
-  @media (max-width: 560px) {
+  @container (max-width: 630px) {
     .note-font {
       display: none;
     }
@@ -41,7 +43,7 @@
     }
   }
 
-  @media (max-width: 390px) {
+  @container (max-width: 370px) {
     .note-table {
       display: none;
     }
