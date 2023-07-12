@@ -1,3 +1,4 @@
+// Toolbar styling
 .note-editor {
   .note-icon-caret {
     margin-right: -7px;
@@ -11,7 +12,133 @@
   }
 
   button {
-    // padding: 5px
     height: 32.17px;
+  }
+
+  .note-toolbar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .note-style .note-btn-group:nth-child(2) {
+    display: none;
+  }
+
+  // Responsiveness
+  @media (max-width: 630px) {
+    .note-misc {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .note-font {
+      display: none;
+    }
+
+    .note-style .note-btn-group:nth-child(2) {
+      display: unset;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .note-table {
+      display: none;
+    }
+  }
+}
+
+// Editor Styling
+.note-editable {
+  font-family: inherit;
+
+  text-align: left;
+
+  .p-break {
+    display: block !important;
+  }
+
+  span {
+    font-size: inherit !important;
+  }
+
+  // Basic elements
+  h2 {
+    font-size: 110%;
+    text-align: center;
+  }
+
+  sub,
+  sup {
+    font-size: 80%;
+  }
+
+  h5,
+  h6 {
+    font-size: 80% !important;
+    text-indent: 0mm !important;
+    text-align: right !important;
+    word-break: break-all !important;
+    display: block;
+    margin-block-start: 1mm !important;
+    margin-block-end: 2mm !important;
+    margin-inline-start: 0px !important;
+    margin-inline-end: 0px !important;
+    font-weight: normal;
+
+    span,
+    h3,
+    h4,
+    div,
+    i,
+    b {
+      text-indent: 0mm;
+    }
+  }
+
+  h1,
+  h3,
+  h4,
+  h5,
+  h6,
+  div,
+  p {
+    &:empty {
+      // Era pra ser display: none, mas tava dando bug no CSS
+      line-height: 0;
+    }
+
+    text-align: left;
+  }
+
+  // Images
+  img {
+    max-width: 100%;
+    border: 2px solid #AFAFAF;
+    border-radius: 8px;
+  }
+
+  .img-div {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 2mm;
+    padding-bottom: 2mm;
+  }
+
+  // Tables
+  .table-bordered {
+    border: 1px solid #dee2e6;
+
+    th,
+    td {
+      border: 1px solid #dee2e6;
+    }
+
+    thead th,
+    thead td {
+      border: 1px solid #dee2e6;
+    }
   }
 }

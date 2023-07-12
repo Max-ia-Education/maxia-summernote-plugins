@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "description": "Summernote Helper Plugins",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "sass": "node-sass summernote.scss summernote.css"
+ },
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  }
 }

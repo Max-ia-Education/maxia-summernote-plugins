@@ -1,12 +1,105 @@
 .note-editor .note-icon-caret {
-  margin-right: -7px;
-}
+  margin-right: -7px; }
+
 .note-editor .dropdown-toggle::after {
-  display: none;
-}
-.note-editor .dropdown-toggle::after .note-icon-caret {
-  display: none;
-}
+  display: none; }
+  .note-editor .dropdown-toggle::after .note-icon-caret {
+    display: none; }
+
 .note-editor button {
-  height: 32.17px;
-}
+  height: 32.17px; }
+
+.note-editor .note-toolbar {
+  display: flex;
+  justify-content: center; }
+
+.note-editor .note-style .note-btn-group:nth-child(2) {
+  display: none; }
+
+@media (max-width: 630px) {
+  .note-editor .note-misc {
+    display: none; } }
+
+@media (max-width: 560px) {
+  .note-editor .note-font {
+    display: none; }
+  .note-editor .note-style .note-btn-group:nth-child(2) {
+    display: unset; } }
+
+@media (max-width: 390px) {
+  .note-editor .note-table {
+    display: none; } }
+
+.note-editable {
+  font-family: inherit;
+  text-align: left; }
+  .note-editable .p-break {
+    display: block !important; }
+  .note-editable span {
+    font-size: inherit !important; }
+  .note-editable h2 {
+    font-size: 110%;
+    text-align: center; }
+  .note-editable sub,
+  .note-editable sup {
+    font-size: 80%; }
+  .note-editable h5,
+  .note-editable h6 {
+    font-size: 80% !important;
+    text-indent: 0mm !important;
+    text-align: right !important;
+    word-break: break-all !important;
+    display: block;
+    margin-block-start: 1mm !important;
+    margin-block-end: 2mm !important;
+    margin-inline-start: 0px !important;
+    margin-inline-end: 0px !important;
+    font-weight: normal; }
+    .note-editable h5 span,
+    .note-editable h5 h3,
+    .note-editable h5 h4,
+    .note-editable h5 div,
+    .note-editable h5 i,
+    .note-editable h5 b,
+    .note-editable h6 span,
+    .note-editable h6 h3,
+    .note-editable h6 h4,
+    .note-editable h6 div,
+    .note-editable h6 i,
+    .note-editable h6 b {
+      text-indent: 0mm; }
+  .note-editable h1,
+  .note-editable h3,
+  .note-editable h4,
+  .note-editable h5,
+  .note-editable h6,
+  .note-editable div,
+  .note-editable p {
+    text-align: left; }
+    .note-editable h1:empty,
+    .note-editable h3:empty,
+    .note-editable h4:empty,
+    .note-editable h5:empty,
+    .note-editable h6:empty,
+    .note-editable div:empty,
+    .note-editable p:empty {
+      line-height: 0; }
+  .note-editable img {
+    max-width: 100%;
+    border: 2px solid #AFAFAF;
+    border-radius: 8px; }
+  .note-editable .img-div {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 2mm;
+    padding-bottom: 2mm; }
+  .note-editable .table-bordered {
+    border: 1px solid #dee2e6; }
+    .note-editable .table-bordered th,
+    .note-editable .table-bordered td {
+      border: 1px solid #dee2e6; }
+    .note-editable .table-bordered thead th,
+    .note-editable .table-bordered thead td {
+      border: 1px solid #dee2e6; }

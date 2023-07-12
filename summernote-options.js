@@ -57,12 +57,12 @@ window.initializeSummernote = function () {
   $(".summernote").summernote({
     //essa parte é a api que renderiza a barra do summernote
     toolbar: [
-      ['style', ['style']],
-      ['font', ['fontStyle']],
-      ['para', ['ul', 'ol', 'paragraph']],
+      ['style', ['style', 'fontStyle']],
+      ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear']],
       ['table', ['table']],
+      ['para', ['ul', 'ol', 'paragraph']],
       ['insert', ['picture', 'math']],
-      ["misc", ["codeview"]]
+      ["misc", ['undo', 'redo']]
     ],
     styleTags: [
       { title: 'Título', tag: 'h2', value: 'h2' },
