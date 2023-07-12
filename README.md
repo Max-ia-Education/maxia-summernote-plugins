@@ -46,4 +46,15 @@ crossorigin="anonymous"></script>
  });
 ```
 3.2 - Cleaner: just the include is enough, it will be called automatically.
-3.3 - Options: just the include is enough, it will be called automatically (you won't need to initialize summernote).
+3.3 - Options: include it so the summernote initialization function is attached to your window object. Call it once the DOM is ready.
+*In React you should call it in the `componentDidMount(useEffect)` lifecycle method.*
+```
+<div class="summernote"></div>
+
+<script>
+$('document').ready(() => {
+    // Function defined in summernote-options.js that should be called once the node is ready
+    window.initializeSummernote();
+})
+</script>
+```
