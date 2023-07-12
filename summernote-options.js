@@ -55,6 +55,7 @@ window.initializeSummernote = function () {
   }
 
   $(".summernote").summernote({
+    inheritPlaceholder: true,
     //essa parte é a api que renderiza a barra do summernote
     toolbar: [
       ['style', ['style', 'fontStyle']],
@@ -75,6 +76,16 @@ window.initializeSummernote = function () {
     },
     icons: {
       magic: 'note-icon-pencil'
+    },
+    // Don't let the user clear all the tags (allways be in <p>, <h2> or <h6>)
+    callbacks: {
+      onChange: function(contents) {
+        if (contents.length === 0) {
+          $(this).summernote('undo')
+        }
+        $(this)[0].onchange()
+      }
     }
   })
+
 }
