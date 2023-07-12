@@ -68,7 +68,7 @@
                         <math-field class="note-latex form-control" style="height: 40px;width:100%">f(x) = \\sin(x+\\pi)</math-field>
                     </p>
                     <p>Preview: </p>
-                    <div style="min-height:20px;"><div class="note-math-dialog"></div>
+                    <div style="min-height:20px;"><span class="note-math-dialog"></span>
                     </div>
                     <script>
                     var $mathElement = $('.note-math-dialog'); //responsavel pela div preview
@@ -135,6 +135,7 @@
                 if (rng.isCollapsed() && self.isOnMath(rng)) {
                     const node = $.summernote.dom.ancestor(rng.sc, self.hasMath)
                     const latex = $(node).find(".note-latex")
+                    console.log("🚀 ~ file: summernote-math.js:138 ~ latex:", latex)
 
                     if (latex.text().length !== 0) {
                         self.$popover.find("button").html(latex.text())
@@ -189,21 +190,32 @@
 
                 if (!$selectedMathNode) {
                     // reset the dialog input and math
-                    //$mathSpan.empty();
+                    $mathSpan.empty();
                     $latexSpan.val("")
                 } else {
                     // edit the selected math node
                     // get the hidden LaTeX markup from the selected math node
                     let hiddenLatex = $selectedMathNode.find(".note-latex").text()
                     $latexSpan.val(hiddenLatex)
-                    // katex.render(hiddenLatex, $mathSpan[0])
                 }
 
                 let mathInfo = {} // not used
 
                 self.showMathDialog(mathInfo).then(function (mathInfo) {
+                    console.log("Insert the text")
                     ui.hideDialog(self.$dialog)
-                    let $mathNodeClone = $mathSpan.clone()
+                    let $mathNodeClone = $latexSpan.clone() // $mathSpan.clone()
+                    let newEl = $('<div>')
+                    newEl.prepend($mathNodeClone[0])
+                    console.log("🚀 ~ file: summernote-math.js:209 ~ newEl:", newEl)
+
+
+                    // Add read-only attribute
+                    $mathNodeClone[0].readOnly = true;
+                    $mathNodeClone[0].style = ''
+                    $mathNodeClone[0].value = $latexSpan[0].value
+                    console.log("🚀 ~ file: summernote-math.js:207 ~ $mathSpan:", $mathSpan)
+                    console.log("🚀 ~ file: summernote-math.js:207 ~ $mathNodeClone:", $mathNodeClone)
                     let $latexNode = $("<span>")
                     $latexNode.addClass("note-latex").css("display", "none").text($latexSpan.val()).appendTo($mathNodeClone)
 
@@ -214,7 +226,8 @@
                     context.invoke("editor.restoreRange")
                     context.invoke("editor.focus")
 
-                    if ($selectedMathNode === null) context.invoke("editor.insertNode", $mathNodeClone[0])
+                    console.log("🚀 ~ file: summernote-math.js:218 ~ $mathNodeClone:", $mathNodeClone)
+                    if ($selectedMathNode === null) context.invoke("editor.insertNode", $('div'))
                     else {
                         // if we are editing an existing mathNode, just replace the contents:
                         if ($.trim($latexNode.html()) == "") {
@@ -250,22 +263,33 @@
 
             self.getSelectedMath = function () {
                 console.log("getSelectedMath")
-                let selection = window.getSelection().anchorNode
-                console.log("🚀 ~ file: summernote-math.js:263 ~ selection:", selection)
+                let selection = window.getSelection().getRangeAt(0).endContainer
+                // console.log("🚀 ~ file: summernote-math.js:263 ~ selection:", selection)
                 if (selection) {
-                    // get all math nodes
-                    let $mathNodes = $(selection).children(".note-math")
-                    let $selectedMathNode = null
-                    // let $mathNodes = $(".note-math")
-                    $mathNodes.each(function () {
-                        console.log("Found math node:", this)
-                        // grab first math node in the selection (including partial).
-                        // if (selection.containsNode(this, true)) {
-                        $selectedMathNode = $(this)
-                        // selection = $(this)
-                        // }
-                    })
-                    return $selectedMathNode
+                    let selectedMathNode = null
+                    
+                    if (selection.className == "note-math") {
+                        selectedMathNode = selection
+                    } else {
+                        // Verify if selection is child of any .note-math
+                        let $mathParent = $(selection).parents(".note-math")
+                        if ($mathParent.length > 0) {
+                            selectedMathNode = $mathParent[0]
+                        }
+                    }
+                    console.log("🚀 ~ file: summernote-math.js:256 ~ selectedMathNode:", selectedMathNode)
+                    // // get all math nodes
+                    // let $mathNodes = $(selection).children(".note-math")
+                    // // let $mathNodes = $(".note-math")
+                    // $mathNodes.each(function () {
+                    //     console.log("Found math node:", this)
+                    //     // grab first math node in the selection (including partial).
+                    //     // if (selection.containsNode(this, true)) {
+                    //     selectedMathNode = $(this)
+                    //     // selection = $(this)
+                    //     // }
+                    // })
+                    return selectedMathNode ? $(selectedMathNode) : null
                 }
             }
         },

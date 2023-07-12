@@ -1,0 +1,12 @@
+.note-editor .note-icon-caret {
+  margin-right: -7px;
+}
+.note-editor .dropdown-toggle::after {
+  display: none;
+}
+.note-editor .dropdown-toggle::after .note-icon-caret {
+  display: none;
+}
+.note-editor button {
+  height: 32.17px;
+}
