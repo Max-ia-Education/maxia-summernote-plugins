@@ -74,7 +74,7 @@
                     var $mathElement = $('.note-math-dialog'); //responsavel pela div preview
                     var mathSpan = $mathElement;
                     var latexSpan = document.getElementsByClassName('note-latex')[0];
-                    latexSpan.addEventListener('keyup', renderMath);
+                    latexSpan.addEventListener('input', renderMath)
 
                     function renderMath(){
                         let oldMath = latexSpan;
@@ -219,6 +219,8 @@
                     let $latexNode = $("<span>")
                     $latexNode.addClass("note-latex").css("display", "none").text($latexSpan.val()).appendTo($mathNodeClone)
 
+                    console.log("🚀 ~ file: summernote-math.js:209 ~ newEl:", newEl)
+
                     // So we don't pick up the dialog node when selecting math nodes in the editor
                     $mathNodeClone.removeClass("note-math-dialog").addClass("note-math")
 
@@ -227,7 +229,7 @@
                     context.invoke("editor.focus")
 
                     console.log("🚀 ~ file: summernote-math.js:218 ~ $mathNodeClone:", $mathNodeClone)
-                    if ($selectedMathNode === null) context.invoke("editor.insertNode", $('div'))
+                    if ($selectedMathNode === null) context.invoke("editor.insertNode", newEl[0])
                     else {
                         // if we are editing an existing mathNode, just replace the contents:
                         if ($.trim($latexNode.html()) == "") {
@@ -263,8 +265,12 @@
 
             self.getSelectedMath = function () {
                 console.log("getSelectedMath")
-                let selection = window.getSelection().getRangeAt(0).endContainer
-                // console.log("🚀 ~ file: summernote-math.js:263 ~ selection:", selection)
+                try {
+                    let selection = window.getSelection()?.getRangeAt(0)?.endContainer
+                } catch (error) {
+                    return null
+                }
+                
                 if (selection) {
                     let selectedMathNode = null
                     

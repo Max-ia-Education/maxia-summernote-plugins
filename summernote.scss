@@ -4,8 +4,6 @@
     padding: 17px !important;
   }
 
-  container-type: inline-size;
-
   .note-icon-caret {
     margin-right: -7px;
   }
@@ -22,6 +20,7 @@
   }
 
   .note-toolbar {
+    container-type: inline-size;
     display: flex;
     justify-content: center;
   }

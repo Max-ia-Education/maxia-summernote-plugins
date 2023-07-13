@@ -63,7 +63,7 @@ window.initializeSummernote = function () {
       ['table', ['table']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['insert', ['picture', 'math']],
-      ["misc", ['undo', 'redo']]
+      ["misc", ['undo', 'redo', 'codeview']]
     ],
     styleTags: [
       { title: 'Título', tag: 'h2', value: 'h2' },

@@ -174,8 +174,8 @@ const swapElements = (body, old_tag, new_tag) => {
         $.extend(true, $.summernote.lang, {
             'en-US': {
                 cleaner: {
-                    tooltip: 'Cleaner',
-                    not: 'Text has been cleaned!',
+                    tooltip: 'Limpar texto',
+                    not: 'Seu texto foi limpo!',
                     limitText: 'Text',
                     limitHTML: 'HTML'
                 }
