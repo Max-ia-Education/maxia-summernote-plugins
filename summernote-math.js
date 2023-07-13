@@ -205,13 +205,17 @@
                     console.log("Insert the text")
                     ui.hideDialog(self.$dialog)
                     let $mathNodeClone = $latexSpan.clone() // $mathSpan.clone()
-                    let newEl = $('<div>')
-                    newEl.prepend($mathNodeClone[0])
+                    
+                    // newEl.prepend($mathNodeClone[0])
+                    const ce = new ComputeEngine.ComputeEngine();
+                    let newEl = $('<img>').attr("src", `https://math.vercel.app?from=${ce.parse($latexSpan.val()).latex}`)//.addClass("note-math")
+                    
+                    newEl.prepend($mathSpan[0])
                     console.log("🚀 ~ file: summernote-math.js:209 ~ newEl:", newEl)
 
 
                     // Add read-only attribute
-                    $mathNodeClone[0].readOnly = true;
+                    // $mathNodeClone[0].readOnly = true;
                     $mathNodeClone[0].style = ''
                     $mathNodeClone[0].value = $latexSpan[0].value
                     console.log("🚀 ~ file: summernote-math.js:207 ~ $mathSpan:", $mathSpan)
@@ -265,8 +269,9 @@
 
             self.getSelectedMath = function () {
                 console.log("getSelectedMath")
+                let selection = null
                 try {
-                    let selection = window.getSelection()?.getRangeAt(0)?.endContainer
+                    selection = window.getSelection()?.getRangeAt(0)?.endContainer
                 } catch (error) {
                     return null
                 }
