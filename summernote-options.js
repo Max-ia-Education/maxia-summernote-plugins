@@ -39,7 +39,7 @@ window.FontStyleButton = function (context) {
     ui.button({
       className: 'dropdown-toggle',
       contents: ui.dropdownButtonContents(ui.icon(options.icons.font), options),
-      tooltip: 'Estilo do texto',
+      // tooltip: 'Estilo do texto',
       data: {
         toggle: 'dropdown'
       }
@@ -52,23 +52,6 @@ window.FontStyleButton = function (context) {
 
   return button.render();   // return button as jquery object
 }
-
-// window.EditMathButton = function (context) {
-//   var ui = $.summernote.ui;
-//   var options = $.summernote.options;
-
-//   let button = ui.button({
-//     contents: options.math.icon,
-//     // container: false,
-//     tooltip: 'Editar equação',
-//     click: function (e) {
-//         // Cursor position must be saved because is lost when popup is opened.
-//         context.invoke("editor.saveRange")
-//         context.invoke("math.show")
-//     },
-//   })
-//   return button.render()
-// }
 
 window.summernoteOptions = {
   inheritPlaceholder: true,
@@ -86,7 +69,6 @@ window.summernoteOptions = {
     { title: 'Texto', tag: 'p', value: 'p' },
     { title: 'Legenda', tag: 'h6', value: 'h6' }
   ],
-
   popover: {
     image: [
       ['image', ['resizeHalf', 'resizeQuarter', 'math', 'resizeNone']],

@@ -5,7 +5,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "sass": "sass -w summernote.scss summernote.css"
+    "sass": "sass -w summernote.scss:summernote.css maxia.scss:maxia.css"
   },
   "devDependencies": {
     "sass": "^1.63.6"

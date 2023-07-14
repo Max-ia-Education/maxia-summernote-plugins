@@ -11,11 +11,11 @@
         "en-US": {
             /* English */
             math: {
-                dialogTitle: "Insert Math",
-                tooltip: "Insert Math",
-                pluginTitle: "Insert math",
-                ok: "Insert",
-                cancel: "Cancel",
+                dialogTitle: "Inserir Equações",
+                tooltip: "Inserir Equações",
+                pluginTitle: "Equações",
+                ok: "Inserir",
+                cancel: "Cancelar",
             },
         },
     })
@@ -46,8 +46,8 @@
             context.memo("button.math", function () {
                 let button = ui.button({
                     contents: options.math.icon,
-                    // container: false,
-                    tooltip: lang.math.tooltip,
+                    // tooltip: lang.math.tooltip,
+                    top: 0,
                     click: function (e) {
                         // Cursor position must be saved because is lost when popup is opened.
                         context.invoke("editor.saveRange")
@@ -60,41 +60,25 @@
             self.initialize = function () {
                 let $container = options.dialogsInBody ? $(document.body) : $editor
 
-                let body = `<div class="form-group">
+                let body = `<div class="form-group d-flex justify-content-center align-items-center flex-column">
 
-                    <p>Type <a href="https://khan.github.io/KaTeX/function-support.html" target=_blank">LaTeX markup</a> here:
+                    <p class="note-modal-title fs-6 mb-2">Digite a equação aqui:</p>
                     
-                    <p style="width:100%">
-                        <math-field class="note-latex form-control" style="height: 40px;width:100%">f(x) = \\sin(x+\\pi)</math-field>
+                    <p class="mb-0" style="min-width:40%">
+                        <math-field class="note-latex form-control"
+                        style="height: 50px;width: fit-content;min-width: 250px" />
                     </p>
-                    <p>Preview: </p>
-                    <div style="min-height:20px;"><span class="note-math-dialog"></span>
-                    </div>
-                    <script>
-                    var $mathElement = $('.note-math-dialog'); //responsavel pela div preview
-                    var mathSpan = $mathElement;
-                    var latexSpan = document.getElementsByClassName('note-latex')[0];
-                    latexSpan.addEventListener('input', renderMath)
-
-                    function renderMath(){
-                        let oldMath = latexSpan;
-                        let latexString = katex.renderToString(latexSpan.value)
-                        mathSpan[0].innerHTML = latexString
-                    }
-
-                    </script>
 
                     </div>`
                 self.$dialog = ui
                     .dialog({
                         title: lang.math.dialogTitle,
                         body: body,
-                        footer: '<button class="btn btn-primary note-math-btn">' + lang.math.ok + "</button>",
+                        footer: '<button class="btn btn-primary note-btn note-btn-primary note-image-btn">' + lang.math.ok + "</button>",
                     })
                     .render()
                     .appendTo($container)
-                //ok
-
+                //ok button
                 self.$popover = ui
                     .popover({
                         className: "note-math-popover",
@@ -103,7 +87,6 @@
                     .appendTo(options.container)
                 const $content = self.$popover.find(".popover-content,.note-popover-content")
                 context.invoke("buttons.build", $content, ["math"])
-
                                 
                 // Math virtual keyboard personalization
                 document.body.style.setProperty("--keyboard-zindex", "1051");
@@ -117,12 +100,14 @@
                             rows: [
                                 ["[+]", "[-]", "[*]", "[/]", "[=]", "[.]", "[(]", "[)]", "\\sqrt{#0}", "#@^{#?}"],
                                 ["[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]", "[0]"],
-                                ["[hr]"], ["[shift]", "[undo]", "[redo]", "[separator]", "[separator]", "[separator]", "[left]", "[right]", 
+                                ["\\theta", "\\pi", "\\alpha", "\\beta", "\\omega", "\\Delta"],
+                                ["[hr]"],
+                                ["[shift]", "[undo]", "[redo]", "[separator]", "[separator]", "[separator]", "[left]", "[right]", 
                                 {
                                     label: "[backspace]",
                                     class: "action hide-shift"
-                                }, 
-                                "[hide-keyboard]"]]
+                                }]
+                            ]
                           }, 
                           "greek"
                         ];
@@ -216,7 +201,9 @@
                     const encodedLatex = encodeURIComponent($latexSpan.val().replaceAll('\\imaginaryI', "i"))
                         .replace(/\(/g, "%28")
                         .replace(/\)/g, "%29") + ".svg"
-                    let newEl = $('<img>').attr("src", `https://math.vercel.app?from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
+                    let imgEl = $('<img>').attr("src", `https://math.vercel.app?from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
+                    let newEl = $('<div>').addClass('img-div inline')
+                    newEl.prepend(imgEl)
                     
                     // Add read-only attribute
                     // $mathNodeClone[0].readOnly = true;

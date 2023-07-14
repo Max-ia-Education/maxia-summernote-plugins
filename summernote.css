@@ -122,7 +122,6 @@
   text-indent: 0mm;
 }
 .note-editable img {
-  padding: 8px;
   max-width: 100%;
   border: 2px solid #AFAFAF;
   border-radius: 8px;
@@ -135,6 +134,10 @@
   padding-top: 4mm;
   padding-bottom: 4mm;
 }
+.note-editable .img-div.inline {
+  display: inline-block;
+  width: fit-content;
+}
 .note-editable .table-bordered {
   border: 1px solid #dee2e6;
 }
@@ -145,6 +148,19 @@
 .note-editable .table-bordered thead th,
 .note-editable .table-bordered thead td {
   border: 1px solid #dee2e6;
+}
+
+.note-editor .btn {
+  width: 100px;
+  height: 40px;
+  margin-right: 20px;
+  float: right;
+}
+.note-editor .note-modal-footer {
+  height: 70px;
+}
+.note-editor .note-btn-primary {
+  background: #009dcc;
 }
 
 /*# sourceMappingURL=summernote.css.map */

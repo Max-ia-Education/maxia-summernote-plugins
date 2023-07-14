@@ -369,8 +369,7 @@ const swapElements = (body, old_tag, new_tag) => {
                     
                 }
 
-                var cleanHtmlPaste = function (input, badTags, keepTagContents, badAttributes, imagesBase64) {
-                    
+                var cleanHtmlPaste = function (input, badTags, keepTagContents, badAttributes, imagesBase64) {                    
                     // outputElement.innerHTML = output;
                     // const eqs = [...outputElement.getElementsByTagName('m:oMathPara')];
                     // console.log(eqs.length);
