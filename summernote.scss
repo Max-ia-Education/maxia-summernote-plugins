@@ -57,6 +57,18 @@
       display: none;
     }
   }
+
+
+  // Edit image popover
+  .note-image-popover {
+    .note-popover-arrow {
+      transform: rotate(180deg) translate(0, -585%);
+    }
+    transform: translate(-1%, -140%);
+  }
+  .note-control-selection-info {
+    display: none;
+  }
 }
 
 // Editor Styling
@@ -133,6 +145,7 @@
 
   // Images
   img {
+    padding: 8px;
     max-width: 100%;
     border: 2px solid #AFAFAF;
     border-radius: 8px;
@@ -143,8 +156,8 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    padding-top: 2mm;
-    padding-bottom: 2mm;
+    padding-top: 4mm;
+    padding-bottom: 4mm;
   }
 
   // Tables

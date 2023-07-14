@@ -43,6 +43,15 @@
     display: none;
   }
 }
+.note-editor .note-image-popover {
+  transform: translate(-1%, -140%);
+}
+.note-editor .note-image-popover .note-popover-arrow {
+  transform: rotate(180deg) translate(0, -585%);
+}
+.note-editor .note-control-selection-info {
+  display: none;
+}
 
 .note-editable {
   font-family: inherit;
@@ -113,6 +122,7 @@
   text-indent: 0mm;
 }
 .note-editable img {
+  padding: 8px;
   max-width: 100%;
   border: 2px solid #AFAFAF;
   border-radius: 8px;
@@ -122,8 +132,8 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  padding-top: 2mm;
-  padding-bottom: 2mm;
+  padding-top: 4mm;
+  padding-bottom: 4mm;
 }
 .note-editable .table-bordered {
   border: 1px solid #dee2e6;
