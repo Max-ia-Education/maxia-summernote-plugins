@@ -57,6 +57,17 @@
                 return button.render()
             })
 
+            // context.memo('button.resizeOneHalf', function () {
+            //     let button = ui.button({
+            //         contents: '<span class="note-fontsize-10">150%</span>',
+            //         tooltip: 'Resize',
+            //         click: function (e) {
+            //             context.invoke('editor.resize', '0.5')
+            //         },
+            //     })
+            //     return button.render()
+            // });
+
             self.initialize = function () {
                 let $container = options.dialogsInBody ? $(document.body) : $editor
 
@@ -65,8 +76,8 @@
                     <p class="note-modal-title fs-6 mb-2">Digite a equação aqui:</p>
                     
                     <p class="mb-0" style="min-width:40%">
-                        <math-field class="note-latex form-control"
-                        style="height: 50px;width: fit-content;min-width: 250px" />
+                        <math-field class="note-latex form-control fs-3"
+                        style="width: fit-content;min-width: 250px" />
                     </p>
 
                     </div>`
@@ -198,9 +209,11 @@
                     let $mathNodeClone = $latexSpan.clone() // $mathSpan.clone()
                     
                     // newEl.prepend($mathNodeClone[0])
-                    const encodedLatex = encodeURIComponent($latexSpan.val().replaceAll('\\imaginaryI', "i"))
+                    const largeLatex = `\\Large{${$latexSpan.val()}}`
+                    const encodedLatex = encodeURIComponent(largeLatex.replaceAll('\\imaginaryI', "i"))
                         .replace(/\(/g, "%28")
                         .replace(/\)/g, "%29") + ".svg"
+                        
                     let imgEl = $('<img>').attr("src", `https://math.vercel.app?from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
                     let newEl = $('<div>').addClass('img-div inline')
                     newEl.prepend(imgEl)

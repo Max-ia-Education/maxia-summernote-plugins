@@ -122,9 +122,12 @@
   text-indent: 0mm;
 }
 .note-editable img {
-  max-width: 100%;
-  border: 2px solid #AFAFAF;
-  border-radius: 8px;
+  overflow: visible;
+  border: none;
+  outline: 2px solid #AFAFAF;
+  border-radius: 2px;
+  outline-offset: 8px;
+  margin: 8px 14px;
 }
 .note-editable .img-div {
   width: 100%;
@@ -137,6 +140,15 @@
 .note-editable .img-div.inline {
   display: inline-block;
   width: fit-content;
+  overflow: visible;
+  margin: 0px 10px;
+}
+.note-editable .img-div.inline img {
+  overflow: visible;
+  border: none;
+  outline: 2px solid #AFAFAF;
+  border-radius: 2px;
+  outline-offset: 10px;
 }
 .note-editable .table-bordered {
   border: 1px solid #dee2e6;

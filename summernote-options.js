@@ -53,6 +53,24 @@ window.FontStyleButton = function (context) {
   return button.render();   // return button as jquery object
 }
 
+window.ResizeOneHalfButton = function (context) {
+  var ui = $.summernote.ui;
+  $editable = context.layoutInfo.editable
+  
+
+  const button = ui.button({
+    contents: '<span class="note-fontsize-10">150%</span>',
+    tooltip: 'Aumentar 50%',
+    click: function(...e) {
+      const img = $editable.data('target')
+      img.style.width = 2 * img.clientWidth + 'px'
+      // context.createInvokeHandler('editor.resize', '0.9')()
+    }
+  })
+
+  return button.render();   // return button as jquery object
+}
+
 window.summernoteOptions = {
   inheritPlaceholder: true,
   //essa parte é a api que renderiza a barra do summernote
@@ -71,13 +89,14 @@ window.summernoteOptions = {
   ],
   popover: {
     image: [
-      ['image', ['resizeHalf', 'resizeQuarter', 'math', 'resizeNone']],
+      ['image', ['math', 'resizeFull']],
       ['remove', ['removeMedia']]
     ]
   },
   buttons: {
     fontStyle: window.FontStyleButton,
-    editMath: window.EditMathButton
+    editMath: window.EditMathButton,
+    resizeOneHalf: window.ResizeOneHalfButton
   },
   icons: {
     magic: 'note-icon-pencil'
