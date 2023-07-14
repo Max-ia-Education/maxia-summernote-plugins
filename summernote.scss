@@ -15,12 +15,18 @@
     }
   }
 
+  .note-align {
+    width: 212px;
+  }
+
   button {
     height: 32.17px;
   }
 
   .note-toolbar {
     container-type: inline-size;
+    z-index: 130;
+
     display: flex;
     justify-content: center;
   }
@@ -42,7 +48,7 @@
     }
 
     .note-style .note-btn-group:nth-child(2) {
-      display: unset;
+      display: inline-block;
     }
   }
 
@@ -73,15 +79,7 @@
     text-indent: 0;
   }
 
-  h2 {
-    font-size: 110%;
-    text-align: center;
-  }
-
-  sub,
-  sup {
-    font-size: 80%;
-  }
+ 
 
   h1,
   h3,
@@ -96,8 +94,19 @@
     }
 
     text-align: left;
+    font-size: unset;
   }
 
+  h2 {
+    font-size: 110%;
+    text-align: center;
+  }
+
+  sub,
+  sup {
+    font-size: 80%;
+  }
+ 
   h5,
   h6 {
     font-size: 80% !important;

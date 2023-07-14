@@ -450,7 +450,9 @@ const swapElements = (body, old_tag, new_tag) => {
                     // Elements swapper
                     swapElements(body, 'h1', 'h2');
                     swapElements(body, 'h3', 'h4');
+                    console.log("🚀 ~ file: summernote-cleaner.js:453 ~ cleanHtmlPaste ~ body:", body)
                     swapElements(body, 'h4', 'p');
+                    console.log("🚀 ~ file: summernote-cleaner.js:455 ~ cleanHtmlPaste ~ body:", body)
                     swapElements(body, 'h5', 'h6');
                     swapElements(body, 'label', 'p');
                     swapElements(body, 'font', 'span');

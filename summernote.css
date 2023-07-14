@@ -10,11 +10,15 @@
 .note-editor .dropdown-toggle::after .note-icon-caret {
   display: none;
 }
+.note-editor .note-align {
+  width: 212px;
+}
 .note-editor button {
   height: 32.17px;
 }
 .note-editor .note-toolbar {
   container-type: inline-size;
+  z-index: 130;
   display: flex;
   justify-content: center;
 }
@@ -31,7 +35,7 @@
     display: none;
   }
   .note-editor .note-style .note-btn-group:nth-child(2) {
-    display: unset;
+    display: inline-block;
   }
 }
 @container (max-width: 370px) {
@@ -54,14 +58,6 @@
   margin: 7px;
   text-indent: 0;
 }
-.note-editable h2 {
-  font-size: 110%;
-  text-align: center;
-}
-.note-editable sub,
-.note-editable sup {
-  font-size: 80%;
-}
 .note-editable h1,
 .note-editable h3,
 .note-editable h4,
@@ -70,6 +66,7 @@
 .note-editable div,
 .note-editable p {
   text-align: left;
+  font-size: unset;
 }
 .note-editable h1:empty,
 .note-editable h3:empty,
@@ -79,6 +76,14 @@
 .note-editable div:empty,
 .note-editable p:empty {
   line-height: 0;
+}
+.note-editable h2 {
+  font-size: 110%;
+  text-align: center;
+}
+.note-editable sub,
+.note-editable sup {
+  font-size: 80%;
 }
 .note-editable h5,
 .note-editable h6 {
