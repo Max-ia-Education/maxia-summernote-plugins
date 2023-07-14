@@ -74,7 +74,7 @@
                     .dialog({
                         title: lang.math.dialogTitle,
                         body: body,
-                        footer: '<button class="btn btn-primary note-btn note-btn-primary note-image-btn">' + lang.math.ok + "</button>",
+                        footer: '<button class="note-math-btn btn btn-primary note-btn note-btn-primary note-image-btn">' + lang.math.ok + "</button>",
                     })
                     .render()
                     .appendTo($container)
