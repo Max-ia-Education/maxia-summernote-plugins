@@ -30,7 +30,7 @@
             var ui = $.summernote.ui
             //var $note=context.layoutInfo.note;
             var $editor = context.layoutInfo.editor
-            //var $editable=context.layoutInfo.editable;
+            var $editable=context.layoutInfo.editable;
             var options = context.options
             var lang = options.langInfo
 
@@ -43,11 +43,9 @@
                 },
             }
 
-            context.memo("button.math", function () {
+            context.memo("button.math", function (actualContext) {
                 let button = ui.button({
                     contents: options.math.icon,
-                    // tooltip: lang.math.tooltip,
-                    top: 0,
                     click: function (e) {
                         // Cursor position must be saved because is lost when popup is opened.
                         context.invoke("editor.saveRange")
@@ -56,17 +54,6 @@
                 })
                 return button.render()
             })
-
-            // context.memo('button.resizeOneHalf', function () {
-            //     let button = ui.button({
-            //         contents: '<span class="note-fontsize-10">150%</span>',
-            //         tooltip: 'Resize',
-            //         click: function (e) {
-            //             context.invoke('editor.resize', '0.5')
-            //         },
-            //     })
-            //     return button.render()
-            // });
 
             self.initialize = function () {
                 let $container = options.dialogsInBody ? $(document.body) : $editor
@@ -101,7 +88,7 @@
                                 
                 // Math virtual keyboard personalization
                 document.body.style.setProperty("--keyboard-zindex", "1051");
-                document.querySelector('math-field').addEventListener('focus', () => {
+                $('math-field').on('focus', e => {
                     // mathVirtualKeyboard.layouts = ["numeric", "symbols"];
                     mathVirtualKeyboard.layouts = [
                         {
@@ -123,6 +110,8 @@
                           "greek"
                         ];
                     mathVirtualKeyboard.visible = true;
+                    mathVirtualKeyboard.executeCommand('selectAll')
+                    
                 });
             }
 
@@ -215,8 +204,9 @@
                         .replace(/\)/g, "%29") + ".svg"
                         
                     let imgEl = $('<img>').attr("src", `https://math.vercel.app?from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
-                    let newEl = $('<div>').addClass('img-div inline')
-                    newEl.prepend(imgEl)
+                        .addClass('inline')
+                    // let newEl = $('<div>').addClass('img-div inline')
+                    // newEl.prepend(imgEl)
                     
                     // Add read-only attribute
                     // $mathNodeClone[0].readOnly = true;
@@ -232,15 +222,15 @@
                     context.invoke("editor.restoreRange")
                     context.invoke("editor.focus")
 
-                    if (latexString === null) context.invoke("editor.insertNode", newEl[0])
+                    if (latexString === null) context.invoke("editor.insertNode", imgEl[0])
                     else {
                         // if we are editing an existing mathNode, just replace the contents:
-                        $latexImg[0].replaceWith(newEl[0])
+                        $latexImg[0].src = imgEl[0].src
                     }
                 })
             }
 
-            self.showMathDialog = function (editorInfo) {
+            self.showMathDialog = function () {
                 return $.Deferred(function (deferred) {
                     let $editBtn = self.$dialog.find(".note-math-btn")
                     ui.onDialogShown(self.$dialog, function () {
@@ -261,22 +251,17 @@
             }
 
             self.getSelectedMath = function () {
-                let selection = null
-                try {
-                    selection = window.getSelection()?.getRangeAt(0)?.endContainer
-                } catch (error) {
-                    return {$latexImg: null, latexString: null}
-                }
-                
-                if (selection) {
-                    let $latexImg = $(selection).find('img')
-                    if (!$latexImg[0]) return {$latexImg: null, latexString: null}
+                let $latexImg = $($editable.data("target"))
 
-                    let src = $latexImg.attr('src')
-                    let latexString = src.split('originalLatex=')[1]
+                if (!$latexImg[0]) return { $latexImg: null, latexString: null }
 
-                    return {$latexImg, latexString}
-                }
+                let src = $latexImg.attr('src')
+
+                if (!src.includes('originalLatex')) return { $latexImg: null, latexString: null }
+
+                let latexString = src.split('originalLatex=')[1]
+
+                return {$latexImg, latexString}
             }
         },
     })

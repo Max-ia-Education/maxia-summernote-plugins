@@ -17,7 +17,8 @@ convert = function (input) {
     var base64 = btoa(decoded);
     var imgSource = `data:image/svg+xml;base64,${base64}`;
     img.setAttribute('src', imgSource);
-    img.className = 'equation-img-maxia'
+    img.className = 'inline'
+    // img.className = 'equation-img-maxia'
     return img.outerHTML
 };
 
@@ -133,17 +134,17 @@ const recursivelyCleanOutBadTags = function(input) {
 
     for (var i= input.children.length; i-->0;) {
         child = input.children[i];
-        if (child.tagName.toLowerCase() === 'img') {
-            if (child.className !== 'equation-img-maxia') {
-                child.outerHTML = '<div class="img-div">' + child.outerHTML + '</div>'
-                // child.removeAttribute('class')
-                // child.outerHTML = '<div class="img-div equationImg">' + child.outerHTML + '</div>'
-            }
-            // else {
-            //     child.outerHTML = '<div class="img-div">' + child.outerHTML + '</div>'
-            // }
-            // child.outerHTML = '<div class="img-div">' + child.outerHTML + '</div>'
-        }
+        // if (child.tagName.toLowerCase() === 'img') {
+        //     if (child.className !== 'equation-img-maxia') {
+        //         child.outerHTML = '<div class="img-div">' + child.outerHTML + '</div>'
+        //         // child.removeAttribute('class')
+        //         // child.outerHTML = '<div class="img-div equationImg">' + child.outerHTML + '</div>'
+        //     }
+        //     // else {
+        //     //     child.outerHTML = '<div class="img-div">' + child.outerHTML + '</div>'
+        //     // }
+        //     // child.outerHTML = '<div class="img-div">' + child.outerHTML + '</div>'
+        // }
 
         if (allowed_tags.includes(child.tagName.toLowerCase())) {
             recursivelyCleanOutBadTags(child);

@@ -57,7 +57,6 @@ window.ResizeOneHalfButton = function (context) {
   var ui = $.summernote.ui;
   $editable = context.layoutInfo.editable
   
-
   const button = ui.button({
     contents: '<span class="note-fontsize-10">150%</span>',
     tooltip: 'Aumentar 50%',
@@ -89,13 +88,12 @@ window.summernoteOptions = {
   ],
   popover: {
     image: [
-      ['image', ['math', 'resizeFull']],
+      ['image', ['math', 'resizeNone']],
       ['remove', ['removeMedia']]
     ]
   },
   buttons: {
     fontStyle: window.FontStyleButton,
-    editMath: window.EditMathButton,
     resizeOneHalf: window.ResizeOneHalfButton
   },
   icons: {
@@ -103,6 +101,9 @@ window.summernoteOptions = {
   },
   // Don't let the user clear all the tags (allways be in <p>, <h2> or <h6>)
   callbacks: {
+    onInit: function() {
+      $(".note-editing-area").addClass("item-design")
+    },
     onChange: function(contents) {
       if (contents.length === 0) {
         $(this).summernote('undo')
