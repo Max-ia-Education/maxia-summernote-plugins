@@ -406,7 +406,7 @@ const conjuntos = {
     "[separator-10]", 
     {latex: "\\Leftarrow", shift: '\\Longleftarrow'}, {latex: '\\Leftrightarrow', shift: "\\iff"}, {latex: "\\Rightarrow", shift: '\\implies'}, 
     "[separator-10]", 
-    "#@°", "\\widehat{#@}", "\\overbrace{#@}^{#?}"],
+    "#@^\\circ", "\\widehat{#@}", "\\overbrace{#@}^{#?}"],
 
     ...baseline
   ]
