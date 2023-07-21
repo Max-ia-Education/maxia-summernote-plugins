@@ -1,3 +1,417 @@
+// Definição dos layouts do teclado virtual
+const baseline = [
+  ["[hr]"],
+  ["[shift]", "[undo]", "[redo]", "[separator]", "[background-color]", "[foreground-color]", "[left]", "[right]",
+    {
+      label: "[backspace]",
+      class: "action hide-shift"
+    }
+  ]
+]
+const basico = {
+  label: "Matemática Básica",
+  toolip: "Only the essential",
+  style: ".digit { background: blue; color: white }",
+  rows: [
+    [
+      {
+        latex: "x",
+        shift: "n",
+        variants: ["y", "z", "t", "r", {
+            latex: "f(#?)",
+            class: "small"
+        }, {
+            latex: "g(#?)",
+            class: "small"
+        }, "x^2", "x^n", "x_n", "x_{n+1}", "x_i", "x_{i+1}"]
+      }, 
+      {
+        latex: "y",
+        shift: "z",
+        variants: ["i", "j", "p", "k", "a", "u"]
+      }, 
+      "[separator-5]", "[7]", "[8]", "[9]", "[/]", "[separator-5]", 
+      {
+        latex: "e",
+        shift: "\\ln",
+        variants: ["\\exp", "\\times 10^{#?}", "\\ln", "\\log_{10}", "\\log"]
+      }, {
+    latex: "\\imaginaryI",
+    variants: ["\\Re", "\\Im", "\\imaginaryJ", "\\Vert #0 \\Vert"]
+      }, {
+          latex: "\\pi",
+          shift: "\\sin",
+          variants: ["\\prod", {
+              latex: "\\theta",
+              aside: "theta"
+          }, {
+              latex: "\\rho",
+              aside: "rho"
+          }, {
+              latex: "\\tau",
+              aside: "tau"
+          }, "\\sin", "\\cos", "\\tan"]
+      }
+    ], 
+    [
+      {
+        latex: "a",
+        shift: "\\alpha",
+        variants: ["y", "z", "t", "r", {
+            latex: "f(#?)",
+            class: "small"
+        }, {
+            latex: "g(#?)",
+            class: "small"
+        }, "x^2", "x^n", "x_n", "x_{n+1}", "x_i", "x_{i+1}"]
+      }, 
+      {
+        latex: "b",
+        shift: "\\beta",
+        variants: ["i", "j", "p", "k", "a", "u"]
+      }, 
+    "[separator-5]", 
+    "[4]", "[5]", "[6]", "[*]", 
+    "[separator-5]", 
+    {
+        latex: "#@^2",
+        shift: "#@^3"
+    }, {
+        latex: "#@^{#0}}",
+        class: "hide-shift",
+        shift: "#@_{#?}"
+    }, {
+        class: "hide-shift",
+        latex: "\\sqrt{#0}",
+        shift: {
+            latex: "\\sqrt[#0]{#?}}"
+        }
+    }], 
+    [
+      {
+      latex: "<",
+      shift: "\\leqslant"
+    }, 
+    {
+      latex: ">",
+      shift: "\\geqslant"
+    },
+    "[separator-5]", 
+    "[1]", "[2]", "[3]", "[-]", 
+    "[separator-5]", 
+    {
+      latex: "\\log#?",
+      class: "hide-shift",
+      shift: "\\log_{#?}#?"
+    }, 
+    {
+      latex: "\\cdot"
+    }, 
+    "#@^{-1}"
+  ], 
+  [
+    {
+      latex: "(",
+      shift: "["
+    }, 
+    {
+      latex: ")",
+      shift: "]"
+    }, 
+    "[separator-5]", 
+    "[0]", "[.]", "[=]", "[+]", 
+    "[separator-5]", 
+    {label: 'sen', latex: "sen(#0)"}, {label: 'cos', latex: "cos(#0)"}, {label: 'tan', latex: "tan(#0)"}
+  ],
+    ...baseline
+  ]
+}
+const fisicoquimica = {
+  label: "Física/Química",
+  toolip: "Utilitário básicos para física e química",
+  rows: [
+    ['\\mu', '\\rho ', '\\pi', "[separator-5]", "\\sqrt{#0}", '#@^2', '\\overrightarrow{#?}', "[separator-5]", "#@_{#?}", "#@^{#?}", "#@_2"],
+
+    ['\\Delta', '\\theta', '\\omega', 
+    "[separator-5]", 
+    {label: 'sen', latex: "sen(#0)"}, {label: 'cos', latex: "cos(#0)"}, {label: 'tan', latex: "tan(#0)"}, 
+    "[separator-5]", 
+    "\\rightarrow","\\rightleftharpoons",  "\\leftarrow"],
+                              
+    
+    ['\\alpha', '\\beta', '\\gamma', "[separator-5]", '[+]', '[-]', '[=]', "[separator-5]", "(s)", "(l)", "(g)"],
+
+    ['\\tau', '\\eta', '\\lambda', 
+    "[separator-5]", 
+    '[/]', '\\cdot', '\\neq', 
+    "[separator-5]", 
+    {latex: "^{#?}_{#?}#@^{#?}", aside: 'Isótopo'}, "(#0)", {latex: "[#@]^{#?}", aside: "Íon"}],
+    ...baseline
+  ]
+}
+const conjuntos = {
+  label: "Conjuntos/Utilitários",
+  toolip: "Conjuntos, Lógica e utilitários",
+  rows: [
+    [
+      {
+        latex: `
+          \\begin{bmatrix}
+          #?   &   #? \\\\
+          #?   &   #?
+          \\end{bmatrix}
+        `, 
+        label: "Matrizes",
+        aside: "Segure para opções",
+        width: 2,
+        variants: [
+          {
+            latex: `
+              \\begin{bmatrix}
+              #?   &   #?
+              \\end{bmatrix}
+            `, 
+            label: "1x2"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #?   &   #? \\\\
+              #?   &   #?
+              \\end{bmatrix}
+            `, 
+            label: "1x3"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #?   \\\\
+              #?
+              \\end{bmatrix}
+            `, 
+            label: "2x1"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #?   &   #? \\\\
+              #?   &   #?
+              \\end{bmatrix}
+            `, 
+            label: "2x2"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #? & #? & #?   \\\\
+              #? & #? & #?
+              \\end{bmatrix}
+            `, 
+            label: "2x3"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #?   \\\\
+              #?   \\\\
+              #?
+              \\end{bmatrix}
+            `, 
+            label: "3x1"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #? & #?   \\\\
+              #? & #?    \\\\
+              #? & #? 
+              \\end{bmatrix}
+            `, 
+            label: "3x2"
+          },
+          {
+            latex: `
+              \\begin{bmatrix}
+              #?   &   #? &   #? \\\\
+              #?   &   #? &   #? \\\\
+              #?   &   #? &   #?
+              \\end{bmatrix}
+            `, 
+            label: "3x3"
+          },
+        ]
+      },
+      "[separator-10]", 
+      {
+        latex: '\\N', 
+        label: '<span class="fs-6 one-liner">Conjuntos Numéricos</span>',
+        aside: "Segure para opções",
+        width: 2,
+        variants: [
+          {
+            latex: '\\N',
+            aside: 'Naturais'
+          },
+          {
+            latex: '\\Z',
+            aside: 'Inteiros'
+          },
+          {
+            latex: '\\Q',
+            aside: 'Racionais'
+          },
+          {
+            latex: '\\R',
+            aside: 'Reais'
+          },
+          {
+            latex: '\\C',
+            aside: 'Complexos'
+          }
+        ]
+      }, 
+      {
+        latex: '\\varnothing'
+      }, 
+      "[separator-10]", 
+      {latex: "\\overline{#?}", shift: "\\overleftrightarrow{#?}"}, {latex: "\\angle", shift: '\\measuredangle'}, {latex: "\\triangle", shift: '\\square'}
+    ],
+
+    [
+      {
+        latex: `
+          \\begin{gather}
+          #? \\\\
+          #? 
+          \\end{gather}
+        `, 
+        label: "Multilinhas",
+        aside: "Segure para opções",
+        width: 2,
+        variants: [
+          {
+            latex: `
+              \\begin{gather}
+              #? \\\\
+              #? 
+              \\end{gather}
+            `, 
+            label: "2",
+          },
+          {
+            latex: `
+              \\begin{gather}
+              #? \\\\
+              #? \\\\
+              #? 
+              \\end{gather}
+            `, 
+            label: "3",
+          },
+          {
+            latex: `
+              \\begin{gather}
+              #? \\\\
+              #? \\\\
+              #? \\\\
+              #? 
+              \\end{gather}
+            `, 
+            label: "4",
+          },
+          {
+            latex: `
+              \\begin{gather}
+              #? \\\\
+              #? \\\\
+              #? \\\\
+              #? \\\\
+              #? 
+              \\end{gather}
+            `, 
+            label: "5",
+          }
+        ]
+      }, 
+      "[separator-10]", 
+      {latex: "\\in", shift: '\\notin'}, {latex: "\\ni", shift: '\\exists'}, {latex: "\\subset", shift: "\\supset"}, 
+      "[separator-10]", 
+      "\\theta","\\alpha",  "\\beta"
+    ],
+        
+
+    [      
+      {
+        latex: `
+          \\begin{cases}
+          #? \\\\
+          #? 
+          \\end{cases}
+        `, 
+        label: "Sistema",
+        aside: "Segure para opções",
+        width: 2,
+        variants: [
+          {
+            latex: `
+              \\begin{cases}
+              #? \\\\
+              #? 
+              \\end{cases}
+            `, 
+            label: "2",
+          },
+          {
+            latex: `
+              \\begin{cases}
+              #? \\\\
+              #? \\\\
+              #? 
+              \\end{cases}
+            `, 
+            label: "3",
+          },
+          {
+            latex: `
+              \\begin{cases}
+              #? \\\\
+              #? \\\\
+              #? \\\\
+              #? 
+              \\end{cases}
+            `, 
+            label: "4",
+          },
+          {
+            latex: `
+              \\begin{cases}
+              #? \\\\
+              #? \\\\
+              #? \\\\
+              #? \\\\
+              #? 
+              \\end{cases}
+            `, 
+            label: "5",
+          }
+        ]
+      }, 
+      "[separator-10]", 
+      {latex: "\\cup", shift: '\\forall'}, {latex: "\\cap", shift: '\\nexists'}, {latex: "\\setminus"}, 
+      "[separator-10]", 
+      {latex: "\\cong", shift: '\\ncong'}, {latex: "\\sim", shift: '\\nsim'},  {latex: "\\|", shift: '\\perp'}, 
+    ],
+
+    ["[separator-20]", 
+    "[separator-10]", 
+    {latex: "\\Leftarrow", shift: '\\Longleftarrow'}, {latex: '\\Leftrightarrow', shift: "\\iff"}, {latex: "\\Rightarrow", shift: '\\implies'}, 
+    "[separator-10]", 
+    "#@°", "\\widehat{#@}", "\\overbrace{#@}^{#?}"],
+
+    ...baseline
+  ]
+}
+
 ;(function (factory) {
     if (typeof define === "function" && define.amd) {
         define(["jquery"], factory)
@@ -89,29 +503,14 @@
                 // Math virtual keyboard personalization
                 document.body.style.setProperty("--keyboard-zindex", "1051");
                 $('math-field').on('focus', e => {
-                    // mathVirtualKeyboard.layouts = ["numeric", "symbols"];
                     mathVirtualKeyboard.layouts = [
-                        {
-                            label: "Básico",
-                            toolip: "Only the essential",
-                            style: ".digit { background: blue; color: white }",
-                            rows: [
-                                ["[+]", "[-]", "[*]", "[/]", "[=]", "[.]", "[(]", "[)]", "\\sqrt{#0}", "#@^{#?}"],
-                                ["[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]", "[0]"],
-                                ["\\theta", "\\pi", "\\alpha", "\\beta", "\\omega", "\\Delta"],
-                                ["[hr]"],
-                                ["[shift]", "[undo]", "[redo]", "[separator]", "[separator]", "[separator]", "[left]", "[right]", 
-                                {
-                                    label: "[backspace]",
-                                    class: "action hide-shift"
-                                }]
-                            ]
-                          }, 
-                          "greek"
-                        ];
+                      basico,
+                      conjuntos,
+                      fisicoquimica
+                    ];
                     mathVirtualKeyboard.visible = true;
                     mathVirtualKeyboard.executeCommand('selectAll')
-                    
+              
                 });
             }
 
@@ -195,25 +594,15 @@
 
                 self.showMathDialog(mathInfo).then(function (mathInfo) {
                     ui.hideDialog(self.$dialog)
-                    let $mathNodeClone = $latexSpan.clone() // $mathSpan.clone()
+                    let $mathNodeClone = $latexSpan.clone()
                     
-                    // newEl.prepend($mathNodeClone[0])
-                    const largeLatex = `\\Large{${$latexSpan.val()}}`
+                    const largeLatex = `\\mathup{\\Large{${$latexSpan.val()}}}`
                     const encodedLatex = encodeURIComponent(largeLatex.replaceAll('\\imaginaryI', "i"))
                         .replace(/\(/g, "%28")
                         .replace(/\)/g, "%29") + ".svg"
                         
-                    let imgEl = $('<img>').attr("src", `https://math.vercel.app?from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
+                    let imgEl = $('<img>').attr("src", `https://math.vercel.app?color=%234c4c4c&from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
                         .addClass('inline')
-                    // let newEl = $('<div>').addClass('img-div inline')
-                    // newEl.prepend(imgEl)
-                    
-                    // Add read-only attribute
-                    // $mathNodeClone[0].readOnly = true;
-                    // $mathNodeClone[0].style = ''
-                    // $mathNodeClone[0].value = $latexSpan[0].value
-                    // let $latexNode = $("<span>")
-                    // $latexNode.addClass("note-latex").css("display", "none").text($latexSpan.val()).appendTo($mathNodeClone)
 
                     // So we don't pick up the dialog node when selecting math nodes in the editor
                     $mathNodeClone.removeClass("note-math-dialog").addClass("note-math")
@@ -259,7 +648,7 @@
 
                 if (!src.includes('originalLatex')) return { $latexImg: null, latexString: null }
 
-                let latexString = src.split('originalLatex=')[1]
+                let latexString = decodeURIComponent(src.split('originalLatex=')[1])
 
                 return {$latexImg, latexString}
             }
