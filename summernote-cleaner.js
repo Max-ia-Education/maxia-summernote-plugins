@@ -227,7 +227,7 @@ const swapElements = (body, old_tag, new_tag) => {
                                 else
                                     $note.summernote('code', cleanPaste($note.summernote('code'), options.cleaner.badTags, options.cleaner.keepTagContents, options.cleaner.badAttributes, options.cleaner.imagePlaceholder), true);
                                 if ($editor.find('.note-status-output').length > 0)
-                                    $editor.find('.note-status-output').html(lang.cleaner.not);
+                                    console.log("Clean text") // $editor.find('.note-status-output').html(lang.cleaner.not);
                             }
                         });
                         return button.render();
@@ -317,7 +317,7 @@ const swapElements = (body, old_tag, new_tag) => {
                                 } else
                                     $note.summernote('pasteHTML', cleanPaste(text, options.cleaner.badTags, options.cleaner.keepTagContents, options.cleaner.badAttributes, images, isHtmlData));
                                 if ($editor.find('.note-status-output').length > 0) {
-                                    $editor.find('.note-status-output').html(lang.cleaner.not);
+                                    console.log("Clean text") // $editor.find('.note-status-output').html(lang.cleaner.not);
                                     /*now set a timeout to clear out the message */
                                     setTimeout(function () {
                                         if ($editor.find('.note-status-output').html() == lang.cleaner.not) {
