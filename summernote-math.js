@@ -602,7 +602,7 @@ const conjuntos = {
                         .replace(/\)/g, "%29") + ".svg"
                         
                     let imgEl = $('<img>').attr("src", `https://math.vercel.app?color=%234c4c4c&from=${encodedLatex}&originalLatex=${$latexSpan.val()}`)
-                        .addClass('inline')
+                        .addClass('inline maxia-equation')
 
                     // So we don't pick up the dialog node when selecting math nodes in the editor
                     $mathNodeClone.removeClass("note-math-dialog").addClass("note-math")
